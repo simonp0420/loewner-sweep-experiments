@@ -1,3 +1,12 @@
+using GLMakie
+
+@inline function sparam(solver::F, i::Integer, j::Integer, f::Real) where F
+    solver(f)[i, j]
+end
+
+function sparam(solver::F, i::Integer, j::Integer, f::AbstractVector) where F
+    map(fᵢ -> sparam(solver, i, j, fᵢ), f)
+end
 
 opts = SweepOptions(
     Δf=1e-5,
@@ -31,9 +40,6 @@ fmin = 0.1
 fmax = 2.0
 fgrid = range(fmin, fmax, length=201)
 ITP = sweep(solver_qwt_s11, fgrid, opts);
-
-using GLMakie
-
 
 function solver_nearresonance(f; f0=1.0, Q=30.0)
     s  = 2π * im * f
@@ -112,32 +118,17 @@ function solver_coupler(f; f0=1.0, BW=0.5, Z0=50.0)
     return ComplexF64[S11 S21; S21 S11]
 end
 
-
+begin
 opts = SweepOptions(
     Δf=1e-5,
     q1=8,
     q2=12,
     adaptive=true,
-    tol=1e-3,      # 10^(-60/20)
-    l=0.25,        # quarter-wave transformer
-    p=2,           # ZQT es SISO
+    p=2,
     memory=3,
-    use_D=false,
+    use_D = false,
     data_partition = true,
     parallel = true
-)
-
-opts = SweepOptions(
-    Δf=1e-5,
-    q1=8,
-    q2=12,
-    adaptive=true,
-    tol=1e-3,      # 10^(-60/20)
-    l=0.25,        # quarter-wave transformer
-    p=2,           # ZQT es SISO
-    memory=3,
-    use_D=false,
-    data_partition = true
 )
 
 fmin = 0.1
@@ -145,12 +136,33 @@ fmax = 2.5
 fgrid = range(fmin, fmax, length=201)
 ITP = sweep(solver_coupler, fgrid, opts);
 fint = range(fmin, fmax, length=1201)
-lines(fint, 20*log10.(abs.(sparam(ITP, 1, 1, fint))))
-lines!(fint, 20*log10.(abs.(sparam(solver_coupler, 1, 1, fint))))
 
-scatter!(ITP.f₀, 20*log10.(abs.(sparam(ITP, 1, 1, (ITP.f₀)))), markersize=8, color=:red, label="muestras")
+fig = Figure()
+ax = Axis(fig[1,1])
+lines!(ax, fint, 20*log10.(abs.(sparam(ITP, 2, 1, fint))))
+lines!(ax, fint, 20*log10.(abs.(sparam(solver_coupler, 2, 1, fint))))
+scatter!(ax, ITP.f₀, 20*log10.(abs.(sparam(ITP, 2, 1, (ITP.f₀)))), markersize=8, color=:red, label="muestras")
+fig
+end
 
 
-lines(fint, 20*log10.(abs.(sparam(ITP, 2, 1, fint))))
-lines!(fint, 20*log10.(abs.(sparam(solver_coupler, 2, 1, fint))))
-scatter!(ITP.f₀, 20*log10.(abs.(sparam(ITP, 2, 1, (ITP.f₀)))), markersize=8, color=:red, label="muestras")
+ITP = sweep(solver_coupler, fgrid, opts);
+ITP2 = sweep_random(solver_coupler, fgrid, opts);
+
+fig = Figure()
+ax = Axis(fig[1,1])
+lines!(ax, fint, 20*log10.(abs.(sparam(ITP, 2, 1, fint))))
+lines!(ax, fint, 20*log10.(abs.(sparam(solver_coupler, 2, 1, fint))))
+scatter!(ax, ITP.f₀, 20*log10.(abs.(sparam(ITP, 2, 1, (ITP.f₀)))), markersize=8, color=:red, label="muestras")
+fig
+
+fig = Figure()
+ax = Axis(fig[1,1])
+lines!(ax, fint, 20*log10.(abs.(sparam(ITP2, 2, 1, fint))))
+lines!(ax, fint, 20*log10.(abs.(sparam(solver_coupler, 2, 1, fint))))
+scatter!(ax, ITP2.f₀, 20*log10.(abs.(sparam(ITP2, 2, 1, (ITP2.f₀)))), markersize=8, color=:red, label="muestras")
+fig
+
+
+@btime sweep($solver_coupler, $fgrid, $opts);
+@btime sweep_random($solver_coupler, $fgrid, $opts);

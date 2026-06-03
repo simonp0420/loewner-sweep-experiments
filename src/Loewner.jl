@@ -1,11 +1,3 @@
-# Creator: Víctor García García
-# Date: 02/06/2026
-# 
-# Implements "Fully Adaptive and Semi-Adaptive Frequency Sweep Algorithm
-# Exploiting Lowener-State Model for EM Simultation of Multiport Systems" 
-#  by T. N. Shilpa and Rakesh Shinha.
-#
-using GLMakie
 using LinearAlgebra
 
 @kwdef struct SweepOptions
@@ -18,12 +10,12 @@ using LinearAlgebra
     p::Int = 2
     memory::Int = 3
     use_D::Bool = true
-    data_partition::Bool = false
+    data_partition::Bool = true
     parallel::Bool = false
     nthreads::Int = Threads.nthreads()
 end
 
-struct LoewnerInterpolator{T}
+struct LoewnerStateModel{T}
     E::Matrix{Complex{T}}
     A::Matrix{Complex{T}}
     B::Matrix{Complex{T}}
@@ -32,23 +24,14 @@ struct LoewnerInterpolator{T}
     H₀::Vector{Matrix{Complex{T}}}
 end
 
-function (interp::LoewnerInterpolator)(f::Real)
+function (interp::LoewnerStateModel)(f::Real)
     s = im * 2π * f
     return interp.C * ((s * interp.E - interp.A) \ interp.B)
 end
 
-function (interp::LoewnerInterpolator)(f::AbstractVector)
+function (interp::LoewnerStateModel)(f::AbstractVector)
     return map(fᵢ -> interp(fᵢ), f)
 end
-
-@inline function sparam(solver::F, i::Integer, j::Integer, f::Real) where F
-    solver(f)[i, j]
-end
-
-function sparam(solver::F, i::Integer, j::Integer, f::AbstractVector) where F
-    map(fᵢ -> sparam(solver, i, j, fᵢ), f)
-end
-
 
 function loewner_partition_posneg(f, S)
     n = length(f)
@@ -268,8 +251,8 @@ function loewner_pseudo_errors_parallel!(errors, fgrid, f₀, E_r1, A_r1, B_r1, 
                     errors[idx] = -Inf
                     continue
                 end
-                s1 = 2π * im * fi
-                s2 = 2π * im * (fi + Δf)
+                s1 = 2*π * im * fi
+                s2 = 2*π * im * (fi + Δf)
                 eval_reduced_model!(H1, M1, X1, E_r1, A_r1, B_r1, C_r1, s1)
                 eval_reduced_model!(H2, M2, X2, E_r2, A_r2, B_r2, C_r2, s2)
                 @. ΔH = H2 - H1
@@ -296,7 +279,7 @@ function sweep(solve::Func, f, sweep_options) where Func
     if sweep_options.adaptive
         append!(f₀, [fmin, fmax])
     else # semi-adaptive
-        append!(f₀, semi_adaptive_freqs(fmin, fmax, n₀))
+        append!(f₀, semi_adaptive_freqs(fmin, fmax, max(2, n₀)))
     end
 
     H₀ = [solve(fᵢ) for fᵢ in f₀]
@@ -313,7 +296,7 @@ function sweep(solve::Func, f, sweep_options) where Func
     errors = Vector{Float64}(undef, length(f))
     memory = 0
     while memory < sweep_options.memory
-        x = im * 2π * (f₀[1] + f₀[end]) / 3
+        x = 2π * (f₀[1] + f₀[end]) / 3
         F = svd_matrix_pencil(x, L, σL)
         r1 = loewner_order(F.S, sweep_options.q1)
         E_r1, A_r1, B_r1, C_r1 = loewner_reduce(L, σL, V, W, F, r1)
@@ -351,5 +334,5 @@ function sweep(solve::Func, f, sweep_options) where Func
     r1 = loewner_order(F.S, sweep_options.q1)
     E_r1, A_r1, B_r1, C_r1 = loewner_reduce(L, σL, V, W, F, r1)
 
-    return LoewnerInterpolator(E_r1, A_r1, B_r1, C_r1, f₀, H₀)
+    return LoewnerStateModel(E_r1, A_r1, B_r1, C_r1, f₀, H₀)
 end
