@@ -9,6 +9,14 @@ function loewner_random_model(L, σL, V, W)
     return E, A, B, C
 end
 
+# qr! instead of lu!
+function eval_random_model!(H, M, X, E, A, B, C, s)
+    M .= @. s * E - A
+    F = qr!(M)
+    ldiv!(X, F, B)
+    mul!(H, C, X)
+    return H
+end
 
 function loewner_pseudo_errors_random!(errors, fgrid, f₀, 
                                         E1, A1, B1, C1,
@@ -39,8 +47,8 @@ function loewner_pseudo_errors_random!(errors, fgrid, f₀,
                     continue
                 end
                 s = 2π * im * fi
-                eval_reduced_model!(H1, M1, X1, E1, A1, B1, C1, s)
-                eval_reduced_model!(H2, M2, X2, E2, A2, B2, C2, s)
+                eval_random_model!(H1, M1, X1, E1, A1, B1, C1, s)
+                eval_random_model!(H2, M2, X2, E2, A2, B2, C2, s)
                 @. ΔH = H2 - H1
                 denom = maximum(svdvals(H1))
                 errors[idx] = denom == 0 ? Inf : maximum(svdvals(ΔH)) / denom

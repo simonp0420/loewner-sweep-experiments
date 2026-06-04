@@ -6,7 +6,7 @@ using LinearAlgebra
     q2::Int = 12
     adaptive::Bool = true
     tol::Float64 = 10^(-60 / 20)
-    l::Float64 = 0.0
+    l::Float64 = 0.1
     p::Int = 2
     memory::Int = 3
     use_D::Bool = true
