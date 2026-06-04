@@ -8,6 +8,6 @@ S. T. N and R. Sinha, "An Adaptive Frequency Sweep Algorithm for Broadband EM Si
 
 The code may later be registered as a standalone module, or included in a sweep library with several methods, if I have inspiration and time.
 
-The directory [examples_pssfss](examples_pssfss) contains examples using [PSSFSS.jl](https://github.com/simonp0420/PSSFSS.jl).
+The directory [examples_pssfss](examples_pssfss) contains examples using [PSSFSS.jl](https://github.com/simonp0420/PSSFSS.jl). Suggestions for other EM simulation libraries where these sweep methods could be tested are welcome.
 
 ![Jerusalem Wang Werner example](examples_pssfss/jerusalem_wang_werner.png)
