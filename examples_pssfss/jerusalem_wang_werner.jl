@@ -46,5 +46,6 @@ function run(; nfreq = 381, ntri = 800, seed = 1, run_direct = false, options = 
 end
 
 
-results = run();
+results = run(run_direct = haskey(ENV, "RUN_DIRECT"));
+#results = run();
 plot_comparison(results; i = 4, j = 2, savepath = joinpath(@__DIR__, "jerusalem_wang_werner.png"))

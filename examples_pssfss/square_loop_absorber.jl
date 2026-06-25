@@ -50,5 +50,6 @@ function run(; design = :thin, nfreq = 121, ntri = 750, seed = 1, run_direct = f
     )
 end
 
-results = run();
+results = run(run_direct = haskey(ENV, "RUN_DIRECT"));
+#results = run();
 plot_comparison(results; savepath = joinpath(@__DIR__, "square_loop_absorber.png"))

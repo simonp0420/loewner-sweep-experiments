@@ -39,6 +39,6 @@ function run(; R = 30.0, nfreq = 119, seed = 1, run_direct = false, options = DE
     )
 end
 
-results = run();
+results = run(run_direct = haskey(ENV, "RUN_DIRECT"));
+#results = run();
 plot_comparison(results; savepath = joinpath(@__DIR__, "resistive_square_patch.png"))
-

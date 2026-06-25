@@ -25,5 +25,6 @@ function run(; nfreq = 49, ny = 60, seed = 1, run_direct = false, options = DEFA
     )
 end
 
-results = run();
+results = run(run_direct = haskey(ENV, "RUN_DIRECT"));
+#results = run();
 plot_comparison(results; savepath = joinpath(@__DIR__, "symmetric_strip.png"))

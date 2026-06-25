@@ -77,5 +77,6 @@ function run(; nfreq = 101, ntri = 600, seed = 1, run_direct = false, options = 
     )
 end
 
-results = run();
+results = run(run_direct = haskey(ENV, "RUN_DIRECT"));
+#results = run();
 plot_comparison(results; savepath = joinpath(@__DIR__, "cpss_meander_strip.png"))

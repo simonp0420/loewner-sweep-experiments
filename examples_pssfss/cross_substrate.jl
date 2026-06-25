@@ -40,7 +40,6 @@ function run(; epsr = 4.0, nfreq = 301, ntri = 600, seed = 1, run_direct = false
     )
 end
 
-results = run();
+results = run(run_direct = haskey(ENV, "RUN_DIRECT"));
+#results = run();
 plot_comparison(results; savepath = joinpath(@__DIR__, "cross_substrate.png"))
-
-

@@ -56,6 +56,7 @@ function run(; nfreq = 196, square_n = 21, disk_ntri = 800, seed = 1, run_direct
       parallel = true,
       l = 2e-3
   )
+    options = DEFAULT_SWEEP_OPTIONS
 
     strata, freqs, steering = flexible_absorber_case(; nfreq, square_n, disk_ntri)
     return run_sweep_comparison(
@@ -69,5 +70,6 @@ function run(; nfreq = 196, square_n = 21, disk_ntri = 800, seed = 1, run_direct
     )
 end
 
-results = run();
+results = run(run_direct = haskey(ENV, "RUN_DIRECT"));
+#results = run();
 plot_comparison(results; savepath = joinpath(@__DIR__, "flexible_absorber.png"))

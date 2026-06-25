@@ -39,5 +39,5 @@ function run(; nfreq = 191, ntri = 1200, seed = 1, run_direct = false, options =
 end
 
 
-results = run();
+results = run(run_direct = haskey(ENV, "RUN_DIRECT"));
 plot_comparison(results; i = 3, j = 1, savepath = joinpath(@__DIR__, "band_pass_filter.png"))
