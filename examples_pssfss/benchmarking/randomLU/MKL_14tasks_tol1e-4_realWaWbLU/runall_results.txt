@@ -1,0 +1,290 @@
+Julia Version 1.12.6
+Commit 15346901f0 (2026-04-09 19:20 UTC)
+Build Info:
+  Official https://julialang.org release
+Platform Info:
+  OS: Windows (x86_64-w64-mingw32)
+  CPU: 28 × Intel(R) Core(TM) i7-14700
+  WORD_SIZE: 64
+  LLVM: libLLVM-18.1.7 (ORCJIT, alderlake)
+  GC: Built with stock GC
+Threads: 28 default, 1 interactive, 28 GC (on 28 virtual cores)
+Environment:
+  JULIA_EDITOR = code
+  JULIA_VSCODE_REPL = 1
+  JULIA_NUM_THREADS = auto,auto
+nothing
+  BLAS: LBTConfig([ILP64] mkl_rt.2.dll, [LP64] mkl_rt.2.dll)
+
+(Δf = 1.0e-5, q1 = 8, q2 = 12, adaptive = true, tol = 0.0001, l = 0.1, p = 3, memory = 3, use_D = false, data_partition = true, parallel = true, nthreads = 14)
+
+Example:            Loaded cross band-pass filter
+Frequency grid:     191 points from 1.0 to 20.0 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 2.238 s
+Loewner total time:  8.707 s
+  build time:        6.447 s
+  eval time:         0.022 s
+Random total time:   7.893 s
+  build time:        5.629 s
+  eval time:         0.026 s
+Direct grid time:    76.485 s
+PSSFSS fast time:    12.432 s
+Loewner samples:     18 / 191
+Random samples:      18 / 191
+PSSFSS fast samples: 28 / 191
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_bg7mjSludg_pssfss_fast.log
+Loewner max relerr:  1.863e-06 at 7.900 GHz
+Loewner med relerr:  3.335e-07
+Random max relerr:   9.936e-07 at 1.300 GHz
+Random med relerr:   6.854e-08
+PSSFSS fast maxerr:  4.781e-07 at 13.100 GHz
+PSSFSS fast mederr:  3.098e-08
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\band_pass_filter.png
+Example:            Meander/strip CPSS
+Frequency grid:     101 points from 10.0 to 20.0 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 1.015 s
+Loewner total time:  5.371 s
+  build time:        4.354 s
+  eval time:         0.002 s
+Random total time:   5.126 s
+  build time:        4.103 s
+  eval time:         0.009 s
+Direct grid time:    32.536 s
+PSSFSS fast time:    5.405 s
+Loewner samples:     11 / 101
+Random samples:      12 / 101
+PSSFSS fast samples: 13 / 101
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_ZgL6T0PwHS_pssfss_fast.log
+Loewner max relerr:  3.737e-07 at 19.600 GHz
+Loewner med relerr:  1.438e-07
+Random max relerr:   3.547e-06 at 20.000 GHz
+Random med relerr:   1.584e-08
+PSSFSS fast maxerr:  4.623e-07 at 19.800 GHz
+PSSFSS fast mederr:  1.038e-07
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\cpss_meander_strip.png
+Example:            Meanderline CPSS
+Frequency grid:     101 points from 10.0 to 20.0 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 0.867 s
+Loewner total time:  3.918 s
+  build time:        3.048 s
+  eval time:         0.003 s
+Random total time:   3.199 s
+  build time:        2.323 s
+  eval time:         0.009 s
+Direct grid time:    19.919 s
+PSSFSS fast time:    4.193 s
+Loewner samples:     11 / 101
+Random samples:      11 / 101
+PSSFSS fast samples: 14 / 101
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_B0TEDevgdk_pssfss_fast.log
+Loewner max relerr:  9.250e-07 at 19.600 GHz
+Loewner med relerr:  2.576e-07
+Random max relerr:   1.041e-08 at 14.300 GHz
+Random med relerr:   1.522e-09
+PSSFSS fast maxerr:  4.443e-06 at 10.400 GHz
+PSSFSS fast mederr:  1.573e-08
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\cpss_meander.png
+Example:            Cross substrate epsr=4.0
+Frequency grid:     301 points from 1.0 to 20.0 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 0.259 s
+Loewner total time:  1.274 s
+  build time:        1.010 s
+  eval time:         0.005 s
+Random total time:   1.105 s
+  build time:        0.811 s
+  eval time:         0.034 s
+Direct grid time:    15.495 s
+PSSFSS fast time:    1.453 s
+Loewner samples:     13 / 301
+Random samples:      13 / 301
+PSSFSS fast samples: 18 / 301
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_dsL8rabEN0_pssfss_fast.log
+Loewner max relerr:  6.205e-06 at 19.620 GHz
+Loewner med relerr:  5.686e-07
+Random max relerr:   1.833e-06 at 19.240 GHz
+Random med relerr:   2.914e-09
+PSSFSS fast maxerr:  2.040e-06 at 19.240 GHz
+PSSFSS fast mederr:  4.903e-09
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\cross_substrate.png
+Example:            Flexible absorber
+Frequency grid:     196 points from 0.5 to 20.0 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 0.255 s
+Loewner total time:  15.030 s
+  build time:        14.773 s
+  eval time:         0.003 s
+Random total time:   56.363 s
+  build time:        56.015 s
+  eval time:         0.093 s
+Direct grid time:    301.832 s
+PSSFSS fast time:    50.015 s
+Loewner samples:     9 / 196
+Random samples:      36 / 196
+PSSFSS fast samples: 32 / 196
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_VGlo3cpK5k_pssfss_fast.log
+Loewner max relerr:  1.944e-01 at 14.600 GHz
+Loewner med relerr:  1.001e-01
+Random max relerr:   4.083e-05 at 14.800 GHz
+Random med relerr:   1.207e-07
+PSSFSS fast maxerr:  3.722e-05 at 0.700 GHz
+PSSFSS fast mederr:  3.270e-07
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\flexible_absorber.png
+Example:            Jerusalem cross Wang-Werner
+Frequency grid:     381 points from 1.0 to 20.0 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 0.541 s
+Loewner total time:  50.549 s
+  build time:        49.772 s
+  eval time:         0.237 s
+Random total time:   93.585 s
+  build time:        91.959 s
+  eval time:         1.085 s
+Direct grid time:    198.721 s
+PSSFSS fast time:    52.890 s
+Loewner samples:     81 / 381
+Random samples:      85 / 381
+PSSFSS fast samples: 86 / 381
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_10XAzGvSVw_pssfss_fast.log
+Loewner max relerr:  1.608e-04 at 14.000 GHz
+Loewner med relerr:  1.472e-06
+Random max relerr:   2.624e-05 at 10.950 GHz
+Random med relerr:   6.249e-07
+PSSFSS fast maxerr:  2.113e-05 at 12.150 GHz
+PSSFSS fast mederr:  6.131e-07
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\jerusalem_wang_werner.png
+Example:            Resistive square patch R=30.0 ohm
+Frequency grid:     119 points from 1.0 to 60.0 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 0.006 s
+Loewner total time:  1.704 s
+  build time:        1.671 s
+  eval time:         0.027 s
+Random total time:   1.525 s
+  build time:        1.441 s
+  eval time:         0.078 s
+Direct grid time:    2.338 s
+PSSFSS fast time:    1.051 s
+Loewner samples:     42 / 119
+Random samples:      41 / 119
+PSSFSS fast samples: 38 / 119
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_rCXgFw1gfE_pssfss_fast.log
+Loewner max relerr:  2.073e-02 at 60.000 GHz
+Loewner med relerr:  2.965e-07
+Random max relerr:   2.000e-02 at 60.000 GHz
+Random med relerr:   2.310e-08
+PSSFSS fast maxerr:  8.258e-06 at 47.000 GHz
+PSSFSS fast mederr:  2.057e-07
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\resistive_square_patch.png
+Example:            Split-ring resonator
+Frequency grid:     651 points from 1.0 to 14.0 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 0.004 s
+Loewner total time:  2.096 s
+  build time:        2.029 s
+  eval time:         0.063 s
+Random total time:   1.646 s
+  build time:        1.526 s
+  eval time:         0.115 s
+Direct grid time:    31.484 s
+PSSFSS fast time:    2.268 s
+Loewner samples:     25 / 651
+Random samples:      23 / 651
+PSSFSS fast samples: 30 / 651
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_T2lGvWbSJu_pssfss_fast.log
+Loewner max relerr:  1.778e-04 at 13.680 GHz
+Loewner med relerr:  1.915e-06
+Random max relerr:   1.526e-05 at 5.820 GHz
+Random med relerr:   4.496e-07
+PSSFSS fast maxerr:  4.337e-05 at 5.600 GHz
+PSSFSS fast mederr:  1.823e-07
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\splitring.png
+Example:            Square loop absorber thin
+Frequency grid:     121 points from 1.0 to 25.0 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 0.373 s
+Loewner total time:  2.487 s
+  build time:        2.113 s
+  eval time:         0.001 s
+Random total time:   2.015 s
+  build time:        1.632 s
+  eval time:         0.010 s
+Direct grid time:    15.628 s
+PSSFSS fast time:    2.059 s
+Loewner samples:     13 / 121
+Random samples:      11 / 121
+PSSFSS fast samples: 13 / 121
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_fMbq1GZCZ0_pssfss_fast.log
+Loewner max relerr:  8.307e-07 at 24.600 GHz
+Loewner med relerr:  6.180e-08
+Random max relerr:   1.236e-06 at 24.600 GHz
+Random med relerr:   5.268e-10
+PSSFSS fast maxerr:  7.975e-07 at 1.600 GHz
+PSSFSS fast mederr:  3.563e-08
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\square_loop_absorber.png
+Example:            Symmetric strip grating
+Frequency grid:     49 points from 0.02 to 0.98 GHz
+Building Loewner model and evaluating surrogate...
+Building random Loewner model and evaluating surrogate...
+Running PSSFSS default fastsweep at all grid points...
+Running direct reference at all grid points...
+
+Internal setup time: 0.139 s
+Loewner total time:  1.489 s
+  build time:        1.349 s
+  eval time:         0.000 s
+Random total time:   1.648 s
+  build time:        1.506 s
+  eval time:         0.003 s
+Direct grid time:    5.589 s
+PSSFSS fast time:    1.960 s
+Loewner samples:     9 / 49
+Random samples:      11 / 49
+PSSFSS fast samples: 14 / 49
+PSSFSS fast log:     C:\Users\peter\AppData\Local\Temp\jl_T4xSnkbYNu_pssfss_fast.log
+Loewner max relerr:  1.338e-04 at 0.260 GHz
+Loewner med relerr:  4.216e-05
+Random max relerr:   2.588e-07 at 0.920 GHz
+Random med relerr:   5.479e-09
+PSSFSS fast maxerr:  9.884e-08 at 0.640 GHz
+PSSFSS fast mederr:  7.636e-09
+Saved figure to: C:\Users\peter\Documents\julia\packages\loewner-sweep-experiments\examples_pssfss\symmetric_strip.png

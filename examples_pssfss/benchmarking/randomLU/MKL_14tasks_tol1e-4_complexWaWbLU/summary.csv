@@ -1,0 +1,11 @@
+Example Case,Frequency Grid,Loewner Total Time,Random Total Time,Direct Grid Time,PSSFSS Fast Time,Loewner Samples,Random Samples,PSSFSS Fast Samples,Loewner Max Relerr,Loewner Med Relerr,Random Max Relerr,Random Med Relerr,PSSFSS Fast Maxerr,PSSFSS Fast Mederr
+Loaded Cross Band-Pass Filter,191,8.284,7.942,73.347,11.615,18,18,28,1.863e-6,3.335e-7,4.734e-7,2.559e-8,4.781e-7,3.098e-8
+Meander/Strip Cpss,101,5.788,4.67,33.169,5.53,11,11,13,3.737e-7,1.438e-7,2.589e-7,1.611e-8,4.623e-7,1.038e-7
+Meanderline Cpss,101,4.089,3.65,20.049,4.223,11,11,14,9.25e-7,2.576e-7,1.277e-8,1.645e-9,4.443e-6,1.573e-8
+Cross Substrate Epsr=4.0,301,1.245,1.002,15.429,1.552,13,11,18,6.205e-6,5.686e-7,1.9e-6,1.875e-8,2.04e-6,4.903e-9
+Flexible Absorber,196,15.346,53.55,299.8,48.857,9,35,32,0.1944,0.1001,7.787e-5,1.506e-7,3.722e-5,3.27e-7
+Jerusalem Cross Wang-Werner,381,49.347,68.642,196.195,52.022,81,86,86,0.0001608,1.472e-6,7.178e-5,3.895e-7,2.113e-5,6.131e-7
+Resistive Square Patch R=30.0 Ohm,119,1.552,1.334,2.327,1.054,42,39,38,0.02073,2.965e-7,0.02082,2.078e-7,8.258e-6,2.057e-7
+Split-Ring Resonator,651,2.023,2.075,30.969,2.427,25,28,30,0.0001778,1.915e-6,3.936e-5,1.047e-7,4.337e-5,1.823e-7
+Square Loop Absorber Thin,121,2.284,1.76,15.414,2.125,13,10,13,8.307e-7,6.18e-8,1.305e-6,4.053e-8,7.975e-7,3.563e-8
+Symmetric Strip Grating,49,1.54,1.334,5.565,1.825,9,9,14,0.0001338,4.216e-5,4.095e-5,6.783e-8,9.884e-8,7.636e-9
