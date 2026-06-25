@@ -1,5 +1,5 @@
-# Several parts were written directly using the PSSFSS internal code. 
-# I tried using PSSFSS as a black box and it worked, 
+# Several parts were written directly using the PSSFSS internal code.
+# I tried using PSSFSS as a black box and it worked,
 # but I also wanted to test its performance, not just its accuracy.
 
 using GLMakie
@@ -11,17 +11,19 @@ using PSSFSS
 
 include(joinpath(@__DIR__, "..", "src", "Loewner.jl"))
 include(joinpath(@__DIR__, "..", "src", "random.jl"))
+include(joinpath(@__DIR__, "..", "src", "randomLU.jl"))
 
 const DEFAULT_SWEEP_OPTIONS = SweepOptions(
     p = 3,
     use_D = false,
     data_partition = true,
     adaptive = true,
-    tol = 0.001,
+    tol = 5e-5,
     memory = 3,
     q1 = 8,
     q2 = 12,
-    parallel = true
+    parallel = true,
+    nthreads = Threads.nthreads() ÷ 2
 )
 
 function gsm_matrix(result)
@@ -128,7 +130,7 @@ function make_pssfss_internal_solver(strata, freqs, steering)
 end
 
 function run_sweep_comparison(strata, freqs, steering; label, options = DEFAULT_SWEEP_OPTIONS, seed = 1, run_random = true, run_direct = false,)
-    
+
     seed === nothing || Random.seed!(seed)
 
     println("Example:            ", label)
@@ -237,9 +239,9 @@ function run_sweep_comparison(strata, freqs, steering; label, options = DEFAULT_
     )
 end
 
-# Just works 
+# Just works
 function plot_comparison(results; i = 1, j = 1, dense_surrogate = false, dense_n = 1001, savepath = joinpath(@__DIR__, "comparison.png"), legend_outside = true, legend_position = :rt,)
-    
+
     fplot = dense_surrogate ?
         collect(range(first(results.freqs), last(results.freqs), length = dense_n)) :
         results.freqs
