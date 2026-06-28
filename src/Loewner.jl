@@ -11,8 +11,8 @@ A keyword constructor is also available. All fields have default values.
 $(DSE.TYPEDFIELDS)
 """
 @kwdef struct SweepOptions
-    "Frequency increment (defaults to `1e-8 GHz`) for pseudo error calculation"
-    Δf::Float64 = 1e-8
+    "Frequency increment (defaults to `1e-5 GHz`) for pseudo error calculation"
+    Δf::Float64 = 1e-5
 
     "Exponent (defaults to 8) used for determining order of first reduced model"
     q1::Int = 8
@@ -47,8 +47,6 @@ $(DSE.TYPEDFIELDS)
     "Number of tasks to spawn if `parallel` is `true`"
     nthreads::Int = Threads.nthreads()
 
-    "If true, use random `Wa` and `Wb` matrices in the second Loewner model"
-    random::Bool = false
 end
 
 """
@@ -571,7 +569,7 @@ function sweep(solve::Func, f, sweep_options) where Func
     errors = Vector{Float64}(undef, length(f))
     memory = 0
     while memory < sweep_options.memory
-        x = 2π * (f₀[1] + f₀[end]) / 3
+        x = complex(0.0, 2π * f₀[cld(length(f₀), 2)])
         F = svd_matrix_pencil(x, L, σL)
         r1 = loewner_order(F.S, sweep_options.q1)
         E_r1, A_r1, B_r1, C_r1 = loewner_reduce(L, σL, V, W, F, r1)
@@ -604,7 +602,7 @@ function sweep(solve::Func, f, sweep_options) where Func
         V, W = vw_mfti(Ha, Hb)
     end
 
-    x = im * 2π * (f₀[1] + f₀[end]) / 3
+    x = complex(0.0, 2π * f₀[cld(length(f₀), 2)])
     F = svd_matrix_pencil(x, L, σL)
     r1 = loewner_order(F.S, sweep_options.q1)
     E_r1, A_r1, B_r1, C_r1 = loewner_reduce(L, σL, V, W, F, r1)

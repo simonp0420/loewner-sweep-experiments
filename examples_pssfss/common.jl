@@ -14,14 +14,16 @@ include(joinpath(@__DIR__, "..", "src", "random.jl"))
 include(joinpath(@__DIR__, "..", "src", "randomLU.jl"))
 
 const DEFAULT_SWEEP_OPTIONS = SweepOptions(
-    p = 3,
-    use_D = false,
-    data_partition = true,
-    adaptive = true,
-    tol = 5e-5,
-    memory = 3,
+    Δf = 1e-5,
     q1 = 8,
     q2 = 12,
+    adaptive = false,
+    tol = 1e-3,
+    l = 0.04,
+    p = 4,
+    memory = 3,
+    use_D = false,
+    data_partition = true,
     parallel = true,
     nthreads = Threads.nthreads() ÷ 2
 )
