@@ -39,11 +39,15 @@ function get_settings(fname)
 end
 
 function plot_summarycsv(fname::AbstractString)
+    fname = abspath(fname)
     (dir, _) = splitdir(fname)
     lastdir = last(splitpath(dir))
     plotfile = joinpath(dir, lastdir * ".png")
     summaryfile = joinpath(dir, "runall_results.txt")
     settings = get_settings(summaryfile)
+    srch_str = "benchmarking"
+    i = findfirst(srch_str, plotfile)[end] + 2
+    settings = string(replace(plotfile[i:end], "\\" => "/"), '\n', settings)
 
     mat = readdlm(fname, ',')
 
@@ -131,12 +135,7 @@ function plot_summarycsv(fname::AbstractString)
 
 
     # Settings:
-    #=
-    ax3 = Axis(
-        fig[3, 1];
-    )
-    =#
-    Label(fig[3,:], settings, fontsize = 12)
+    Label(fig[3,:], settings, fontsize = 12, halign = :center)
     colgap!(fig.layout, 12)
 
     display(fig)
